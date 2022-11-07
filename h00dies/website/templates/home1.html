@@ -1,0 +1,113 @@
+{% extends "base1.html" %}
+
+{% block head %}
+<head>
+  <style>
+
+
+.showcase1 {
+
+color: #fff;
+height: 100vh;
+position: relative;
+scroll-snap-align: start;  
+background:var(--primary-color);
+}
+
+.showcase1:before {
+content: '';
+
+
+position: absolute;
+top: 0;
+left: 0;
+margin:0;
+width: 100%;
+height: 100vh;
+z-index: -1;
+}
+:root.light .showcase1:before{
+background: url('static/abc.jpg')no-repeat center center/cover;
+}
+.showcase1 .showcase1-inner {
+display: flex;
+margin:0;
+margin-left: 4%;
+margin-right: 10%;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+height: 100%;
+max-height: 100vh;
+}
+
+.showcase1 h1 {
+font-size: 4rem;
+margin-top: 0px;
+-webkit-animation: flickerAnimation 1s infinite;
+-moz-animation: flickerAnimation 1s infinite;
+-o-animation: flickerAnimation 1s infinite;
+animation: flickerAnimation 10s infinite;
+}
+@media (max-width:1000px){
+.showcase1 h1{
+font-size:6vw;
+}
+}
+@keyframes flickerAnimation {
+0%   { opacity:1; }
+50%  { opacity:0; }
+100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+0%   { opacity:1; }
+50%  { opacity:0; }
+100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+0%   { opacity:1; }
+50%  { opacity:0; }
+100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+0%   { opacity:1; }
+50%  { opacity:0; }
+100% { opacity:1; }
+}
+.dots{
+position: absolute;
+
+max-width: 100%;
+margin: 0;
+background: url('static/ants.png')no-repeat center center;
+background-size: 100vh;
+pointer-events: none;
+
+max-width: 100%;
+
+}
+.photo{
+  width: 500px;
+  height: 300px;
+  margin-left: 0vw;
+  margin-top: 0vh;
+}
+
+</style>
+<link rel="icon" type="image/x-icon" href="/static/h00dies.png" height="auto" width="auto">
+
+<title>h00dies</title>
+
+{% endblock %} 
+{% block body %}
+<header class="showcase">
+    <div class="container showcase-inner">               
+         <h1 align="center" style="color:white; font-family: cursive; "><u><b>COMING SOON </b></u></h1>
+
+<div class="photo"><img src="static/design.png" width="100%" height="100%"> </div>
+    </div>
+</header>
+
+{% endblock %}
+

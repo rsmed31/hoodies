@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* CORE STYLES */
+:root {
+  --primary-color: rgba(13, 110, 139, 0.75);
+  --overlay-color: rgba(24, 39, 51 , 0.85);
+  --menu-speed: 0.75s;
+}
+:root.light {
+  --overlay-color:rgba(45, 51, 45, 0.466); 
+  --primary-color: #05668d7a;
+  --secondary-color:rgba(0, 0, 0, 0.733);
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+:root:not(.light) {
+  --primary-color:rgba(0, 0, 0, 0.733);
+  --secondary-color:#05668d7a;
+  --overlay-color:rgba(107, 100, 106, 0.63);
+
+  --secondary-font-color: #495057;
+}
+:root.light h1{
+  color:#fff
+}
+html{
+    font-family: sans-serif;
+  -ms-scroll-snap-type: mandatory;
+      scroll-snap-type: mandatory;
+  -ms-scroll-snap-points-y: repeat(100vh);
+      scroll-snap-points-y: repeat(100vh);
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.4;
+  background-color: #EDDECD;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 3rem;
+}
+
+.showcase {
+  background: var(--primary-color);
+  color: #fff;
+  height: 100vh;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.showcase:before {
+  content: '';
+  position: absolute;
+  background: url('static/abcd.jpg')no-repeat center center/cover;
+  top: 0;
+  left: 0;
+  margin:0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+:root.light .showcase:before{
+  background: url('static/abc.jpg')no-repeat center center/cover;
+  backface-visibility: visible;
+  backdrop-filter:var(--overlay-color);
+}
+.showcase .showcase-inner {
+  display: flex;
+
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  min-height: fit-content;
+  text-align: center;
+}
+
+.showcase h1 {
+   font-size: 15vh;
+   margin-top: 0px;
+   margin-bottom: 5px;
+}
+.showcase p{
+
+  text-align: center;
+  font-size:2.3vh;
+}
+@media (max-width:1000px){
+  .showcase h1{
+    font-size:9vh;
+  }
+}
+@media (max-width:380px){
+  .showcase h1{
+    font-size:7vh;
+  }
+}
+
+    
+
+
+
+.btn {
+  display: inline-block;
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  transition: opacity 1s ease-in-out;
+  text-decoration: none;
+}
+
+.btn:hover {
+  opacity: 0.7;
+}
+
+/* MENU STYLES */
+.menu-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.menu-wrap .toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  
+}
+
+.menu-wrap .hamburger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  padding: 1rem;
+  background: var(--primary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hamburger Line */
+.menu-wrap .hamburger > div {
+  position: relative;
+  flex: none;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+/* Hamburger Lines - Top & Bottom */
+.menu-wrap .hamburger > div::before,
+.menu-wrap .hamburger > div::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  width: 100%;
+  height: 2px;
+  background: inherit;
+}
+
+/* Moves Line Down */
+.menu-wrap .hamburger > div::after {
+  top: 10px;
+}
+
+/* Toggler Animation */
+.menu-wrap .toggler:checked + .hamburger > div {
+  transform: rotate(135deg);
+}
+
+/* Turns Lines Into X */
+.menu-wrap .toggler:checked + .hamburger > div:before,
+.menu-wrap .toggler:checked + .hamburger > div:after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+/* Rotate On Hover When Checked */
+.menu-wrap .toggler:checked:hover + .hamburger > div {
+  transform: rotate(225deg);
+}
+
+/* Show Menu */
+.menu-wrap .toggler:checked ~ .menu {
+  visibility: visible;
+}
+
+.menu-wrap .toggler:checked ~ .menu > div {
+  transform: scale(1);
+  transition-duration: var(--menu-speed);
+}
+
+.menu-wrap .toggler:checked ~ .menu > div > div {
+  opacity: 1;
+  transition:  opacity 0.4s ease 0.4s;
+}
+
+.menu-wrap .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-wrap .menu > div {
+  background: var(--overlay-color);
+  border-radius: 50%;
+  width: 200vw;
+  height: 200vw;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0);
+  transition: all 0.4s ease;
+}
+
+.menu-wrap .menu > div > div {
+  text-align: center;
+  max-width: 90vw;
+  max-height: 100vh;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.menu-wrap .menu > div > div > ul > li {
+  list-style: none;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.menu-wrap .menu > div > div > ul > li > a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+.ripple {
+   width: 10px;
+   height: 10px;
+   position: fixed;
+   border-radius: 50%;
+   border: 1px solid #ffffff80;
+}
+.photo1{
+  width: 300px;
+  height: 300px;
+  margin-left: 0vw;
+  margin-top: 0vh;
+}
+
+
+@keyframes ripple-effect {
+   to {
+      transform:scale(15);
+      opacity: 0.01;
+   }
+}
+
+    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='animated.css')}}"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://kit.fontawesome.com/dd26bcec29.js" crossorigin="anonymous"></script>
+  <link href="https://cloud-cube-eu2.s3.amazonaws.com/vae4jyidy3yg">
+  <link rel="stylesheet" href="{{ url_for('static', filename='label.css')}}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='card.css')}}"/>
+  <script src="static/dark.js"></script>
+  <script src="static/index.js"></script>
+
+ 
+  {% block head %}{% endblock %}
+</head>
+<body>
+  {% block body %}{% endblock %}
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert" style=" position:absolute; top:10%; width:100%">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {% endif %} {% endfor %} {% endif %} {% endwith %}
+  <div class="menu-wrap">
+
+    <input type="checkbox" class="toggler">
+    <div class="hamburger"><div></div></div>
+    <div class="menu">
+      <div>
+        <div>
+          <ul>   
+           <li><a href="/">H0me</a></li>
+
+            <li><a href="/Holders">H0lders</a></li>
+
+          </ul>
+          <div class="photo1"><img src="static/h00dies.png" width="100%" height="100%"> </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="theme-icon">
+    <i
+      aria-hidden="true"
+      class="fas fa-moon"
+      title="Toggle between dark and light mode"
+    ></i>
+    <i
+      aria-hidden="true"
+      class="fas fa-sun"
+      title="Toggle between dark and light mode"
+    ></i>
+    <span class="sr-only">Toggle between dark and light mode</span>
+  </button>
+  <script
+  type="text/javascript"
+  src="{{ url_for('static', filename='dark.js') }}"
+></script>
+<script>
+    // Initialize Variables
+    var closePopup = document.getElementById("popupclose");
+	var overlay = document.getElementById("overlay");
+	var popup = document.getElementById("popup");
+	var button = document.getElementById("button");
+	// Close Popup Event
+	closePopup.onclick = function() {
+	  overlay.style.display = 'none';
+	  popup.style.display = 'none';
+	};
+	// Show Overlay and Popup
+	button.onclick = function() {
+	  overlay.style.display = 'block';
+	  popup.style.display = 'block';
+	}
+</script>
+</body>
+</html>
